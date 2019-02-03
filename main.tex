@@ -87,7 +87,7 @@ Recently, medical biometrics, a new set of biometric signal are coming to forwar
 \label{tab:comparision}
 \end{table}
 
-Among those biometric traits, the ECG is the most promising signal for biometrics system\parencite{Pinto:2018evolution}. Because ECG is difficult to be falsified and can be used for liveness detection as it is a live indicator\parencite{Wang:2007analysis}.
+Among those biometric traits, the ECG is the most promising signal for biometrics system\parencite{Pinto:2018evolution}. Because ECG is difficult to be falsified and can be used for liveness detection as it is a live indicator\parencite{Wang:2007analysis}. 
 
 \subsection{Electrocardiogram}
 The ECG signal describes the electrical activity of the heart over time. It is one of the most popular signals used for health of human. To record ECG, a sensor should have at least two metal electrodes which must be contact with the skin directly\parencite{Blasco:2018feasibility}.
@@ -99,7 +99,7 @@ The ECG signal describes the electrical activity of the heart over time. It is o
 \label{fig:ecg}
 \end{figure}
 
-Fig \ref{fig:ecg} shows the main components, for instance, P wave, QRS complex and T wave. The P wave is start for ECG signal, it represents the depolarization of the right and left atria\parencite{Agrafioti:2011heart}. The QRS wave is the largest wave, describes the depolarization of the ventricles\parencite{Wiki:ecg}. Finally, T wave is the end of a single ECG beat, which shows the repolarization of the ventricles\parencite{Lilly:2012pathophysiology}. For the ECG identification system, there are two main types: fiducial or non-fiducial\parencite{Agrafioti:2012secure}. 
+Biel et al.\autocite{Biel:2001ecg} are one of the earliest article which introduce the possibility of using ECG for human identification. Fig \ref{fig:ecg} shows the main components which is used to identify humans include P wave, QRS complex and T wave. The P wave is start for ECG signal, it represents the depolarization of the right and left atria\parencite{Agrafioti:2011heart}. The QRS wave is the largest wave, describes the depolarization of the ventricles\parencite{Wiki:ecg}. Finally, T wave is the end of a single ECG beat, which shows the repolarization of the ventricles\parencite{Lilly:2012pathophysiology}. For the ECG identification system, there are two main types: fiducial or non-fiducial\parencite{Agrafioti:2012secure}. In fiducial type, the peak of R wave, T wave and P wave; the R-R interval, R-T interval are considered as features\parencite{Odinaka:2012analysis}. The non-fiducial based method do not use features, instead some coefficients will be calculated as wavelet transform is used by Chan et al. \autocite{Chan2008wavelet}.
 
 \subsection{Photoplethysmography}
 Photoplethysmography (PPG) is a simple technique to detect blood volume changes at skin\parencite{Karimian:2017human}. PPG is widely used in fitness trackers and smart-watches to monitor user's fitness behavior and health statement. The sensors detect the light variations when blood pass through the skin\parencite{Blasco:2018feasibility}. PPG can be gathered from transmissive mode at the fingertip or reflection mode as on the forehead\parencite{wiki:ppg}. A common PPG is shown at Fig
@@ -114,17 +114,22 @@ Photoplethysmography (PPG) is a simple technique to detect blood volume changes 
 \subsection{Current Attacks}
 As mentioned before, biometric identification system does solve some problems in traditional identification system, such as lost/forgotten because they are based on physical objects or user's knowledge. However, nothing is perfect, biometrics leads into some brand-new risks. Fingerprint and face recognition are most common identification method, both can be easily observed and replicated by attacker\parencite{Eberz:2018your}. For example, fingerprints can be collected from smooth surface like a glass cup. Moreover, face identification system might make a wrong decision because of a 2-D photo which is grabbed from victim's social media as Facebook.
 
-Medical biometrics have become a popular research subject. In 2010, Odinaka et al. thought ECG are difficult to forge\parencite{Odinaka:2010ecg}.
+Medical biometrics have become a popular research subject. In 2010, Odinaka et al. thought ECG are difficult to forge\parencite{Odinaka:2010ecg}. Agrafioti et al. mentioned the main strength of medical biometrics is robustness to reply, obfuscation and circumvention attack in 2011\parencite{Agrafioti:2011heart}.
+
+However, even existing ECG biometrics are considered offering a high-security level against impersonation attacks\parencite{Blasco:2018feasibility}, it is not perfect, some attack has already be introduced. For instance, Eberz et al. present a presentation attack against ECG biometrics in Nymi band by reply previous ECG signals\parencite{Eberz:2017broken}. In the reminder of this section, we will discuss about current attacks for both traditional biometrics and medical biometric.
+
 \subsubsection{Attacks on tradition biometrics}
 
 \subsubsection{Attacks on medical biometrics}
 
 \subsection{Motivation}
+A method is introduced by Verkruysse et al. which can collect PPG remotely (> 1m) with ambient light by inexpensive digital cameras (< \$200)\parencite{Verkruysse2008remotePPG}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width = .8\textwidth]{ecg_ppg.PNG}
 \caption{Synchronize ECG and PPG signals from BIDMC PPG and Respiration Dataset\autocite{PhysioNet}}
+
 \label{fig:ppg_ecg}
 \end{figure}
 
