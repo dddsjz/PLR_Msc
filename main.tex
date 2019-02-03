@@ -32,33 +32,101 @@
 
 \clearpage
 \section{Introduction}\label{Introduction}
-Identify individuals is important for society. Before the explosion in population growth, people could easily recognize each other by using body characteristics such as face, voice, because thee small communities where they lived in\parencite{Jain:2011bio}.In recent years, identification or authentication system is widely used in website, smart phones, banks and airport to protect us, include our information\parencite{Pinto:2018evolution}. 
+Identify individuals is important for society. Before the explosion in population growth, people could easily recognize each other by using body characteristics such as face, voice, because the small communities where they lived in\parencite{Jain:2011bio}.In recent years, identification or authentication system is widely used in website, smart phones, banks and airport to protect us, include our information\parencite{Pinto:2018evolution}. 
 
-The identification or authentication process for machines normally based on three methods: (1) what person knows, (2) what person possess, (3) what person are. While the first method relies on person's knowledge; the second method based on things which only kept by the person, the thing is used like token; the third method depend on the inherent physical signal which is know as biometric. The identification system based on knowledge and token such as using passwords or ID card, can be easily forgotten/lost, guessed/stolen or shared\parencite{Jain:2011bio}. To more specific, password is used in nearly all identification systems, but it is difficult to chose a good password which should satisfy a rule called "easy to remember but hard to guess". As supplementary, 2 - factor authentication is used for many systems to improve security, the second factor is USB-key or ID card. As the discussion before, the main problem for those two factors are the same. they are physical objects which can be easily forgotten/lost, it will cause unexpected deny of service\parencite{Blasco:2018feasibility}.
+The identification or authentication process for machines normally based on three methods: (1) what person knows, (2) what person possess, (3) what person are. While the first method relies on person's knowledge; the second method based on things which only kept by the person, the thing is used like token; the third method depend on the inherent physical signal which is known as biometric. The identification system based on knowledge and token such as using passwords or ID card, can be easily forgotten/lost, guessed/stolen or shared\parencite{Jain:2011bio}. To more specific, password is used in nearly all identification systems, but it is difficult to choose a good password which should satisfy a rule called "easy to remember but hard to guess". As supplementary, 2 - factor authentication is used for many systems to improve security, the second factor is USB-key or ID card. As the discussion before, the main problem for those two factors are the same. they are physical objects which can be easily forgotten/lost, it will cause unexpected deny of service\parencite{Blasco:2018feasibility}.
 
 Biometric recognition is more secure and gives a more reliable solution for person recognition because of the biometric features are unique for every individual\parencite{Jain:2011bio}. Compare with password or ID card, static biometric features such as fingerprints, face, iris; and dynamic features, for instance, voice, PPG(Photoplethysmogram) and ECG(Electrocardiogram), are hard to steal or manipulate\parencite{Agrafioti:2011heart}. In additional, compare with static biometric features, dynamic features can meet more secure needs. Such as liveness detection and continuous authentication\parencite{Agrafioti:2011medical}.
 
-In this paper, we purpose to finding a transfer equation from PPG to ECG, it is a risk from ECG identification system. ECG signals are more considering as sensitive information, which can shows not only personal health information but also psychological status\parencite{Damousis:2008unobtrusive}. Because of that, gathering ECG from individual is difficult and expensive. However, PPG can be easily collect because of the fitness trackers and smart-watches have become very popular\parencite{Blasco:2018feasibility}. Thus, the attack which forge victim's ECG to cheat identification system by transfer from victim's PPG will be much easier and cheaper than collect victim's ECG signal directly. And the risk should be considered seriously. 
+In this paper, we purpose to finding a transfer equation from PPG to ECG, it is a risk from ECG identification system. ECG signals are more considering as sensitive information, which can show not only personal health information but also psychological status\parencite{Damousis:2008unobtrusive}. Because of that, gathering ECG from individual is difficult and expensive. However, PPG can be easily collected because of the fitness trackers and smart-watches have become very popular\parencite{Blasco:2018feasibility}. Thus, the attack which forge victim's ECG to cheat identification system by transfer from victim's PPG will be much easier and cheaper than collect victim's ECG signal directly. And the risk should be considered seriously. 
 
 The following sections will be organized as: Section 2 will discuss biometric system, include some current attacks, PPG and ECG authentication system and some relevant attacks. Section 3 will cover information on machine learning which include those methods used in authentication system. Neural network will be extract from those method. Section 4 will be some related work.
 
 \section{Biometrics}\label{Biometrics}
-Biometrics, or biometric recognition, is becoming more and more popular in government and civilian identity management applications because it is the only way the identity management system can figure out whether the individual is already known or not\parencite{Jain:2011bio}. Biometrics is a pattern recognition problem, user who wants to be authenticated should registered a set of physiological and/or behavioural characteristics before and provides a current characteristics to match the previous one\parencite{Blasco:2018feasibility}. For example, physiological characteristics contain face, iris and the fingerprints, on the other side, keystroke dynamics, gait and voice\parencite{Agrafioti:2011heart}. 
+Biometrics, or biometric recognition, is becoming more and more popular in government and civilian identity management applications because it is the only way the identity management system can figure out whether the individual is already known or not\parencite{Jain:2011bio}. Biometrics is a pattern recognition problem, user who wants to be authenticated should registered a set of physiological and/or behavioral characteristics before and provides a current characteristic to match the previous one\parencite{Blasco:2018feasibility}. For example, physiological characteristics contain face, iris and the fingerprints, on the other side, keystroke dynamics, gait and voice\parencite{Agrafioti:2011heart}. 
 
 \subsection{Biometric System}
-The process in a common Biometric system should like Figure \ref{fig:common_process}.
+The process in a common Biometric system should like Figure \ref{fig:common_process}. 1. Raw biometric data will be collected by sensors; 2. Quality check will be used to biometric data and enhancement of the collected trait\parencite{Pinto:2018evolution}; 3. Raw signal may have noise inside. Signal processing procedure should reduce those noise. In addition, a biometric recognition is a 1-against-many identification which means system should be able to recognize individual from a database include many different individual's data. Thus, even same type biometric signal, the scale might be different. That is another function for signal processing, normalization. To ensure every data are in the same scale so that the matching \& decision procedure is accuracy; 4. Feature extraction is an optional process, only fiducial-based algorithm need feature extraction. Normally, fingerprint recognition, face recognition and iris recognition are fiducial-based\parencite{Jain:2011bio}; 5. To enroll individual into system, fiducial-based method will enroll a set of features, non-fiducial-based method should store signals; 6. The last step of biometric system is Matching and Decision, which is the step that can identify individual by compare stored data with coming data. If fiducial-based system, coming data should also extract a set of features to be compare.
 
-\begin{figure}[h!]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width = .8\textwidth]{common_bio_process.png}
 \caption{The common process for biometric system}
 \label{fig:common_process}
 \end{figure}
 
+\subsection{Medical Biometrics}
+Recently, medical biometrics, a new set of biometric signal are coming to forward(\parencite{Abo:2014biometric},\parencite{Agrafioti:2012secure},\parencite{Akhter:2016heart}, cited in \parencite{Pinto:2018evolution}). In general, medical biometrics depend on physiological characteristics, such as blood pressure, electrocardiogram (ECG), electroencephalogram (EEG), photoplethysmogram (PPG), etc.\parencite{Agrafioti:2011medical}. Table \ref{tab:comparision} shows the comparison among biometric traits.
 
+\begin{table}
 
-\subsection{Medical Biometric}
+\centering
+ \begin{tabular}{c c c} 
+ Trait & Benefits & Drawbacks \\ [0.5ex] 
+ \hline\hline
+  & Universality & Requires contact \\ Electrocardiogram(ECG) & Hidden nature & Variability over time \\ & Simple acquisition & \\ 
+ \hline
+  & Universality & Expensive equipment \\ Electroencephalogram(EEG) & Hidden nature & Vulnerability to noise \\ &  & Variability over time \\ 
+ \hline
+  & Easily measurable & Easy circumvention \\ Face & Affordable equipment & Depends on face \\ & & Visibility and lighting \\ 
+ \hline
+  Fingerprint & High performance & Requires contact \\ & permanent over time & \\
+ \hline
+  Gait & Easy to measure & Low performance \\ & Affordable equipment & Variability over time \\
+  \hline
+  Iris & High performance & Expensive equipment \\
+  \hline
+  Palmprint & High measurability & Requires contact \\ & Permanent over time &  \\ 
+  \hline
+  & Easy to acquire & Low performance \\ Photoplethysmogram(PPG) & Hidden nature & Variability over time \\ & Affordable equipment & \\ 
+  \hline
+ Voice & Affordable equipment & Low performance \\ [1ex] 
+ \hline
+\end{tabular}
+\caption{Comparison among biometric traits\autocite{Pinto:2018evolution}}
+\label{tab:comparision}
+\end{table}
+
+Among those biometric traits, the ECG is the most promising signal for biometrics system\parencite{Pinto:2018evolution}. Because ECG is difficult to be falsified and can be used for liveness detection as it is a live indicator\parencite{Wang:2007analysis}.
+
+\subsection{Electrocardiogram}
+The ECG signal describes the electrical activity of the heart over time. It is one of the most popular signals used for health of human. To record ECG, a sensor should have at least two metal electrodes which must be contact with the skin directly\parencite{Blasco:2018feasibility}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .8\textwidth]{ecg.PNG}
+\caption{ECG signals from BIDMC PPG and Respiration Dataset\autocite{PhysioNet}}
+\label{fig:ecg}
+\end{figure}
+
+Fig \ref{fig:ecg} shows the main components, for instance, P wave, QRS complex and T wave. The P wave is start for ECG signal, it represents the depolarization of the right and left atria\parencite{Agrafioti:2011heart}. The QRS wave is the largest wave, describes the depolarization of the ventricles\parencite{Wiki:ecg}. Finally, T wave is the end of a single ECG beat, which shows the repolarization of the ventricles\parencite{Lilly:2012pathophysiology}. For the ECG identification system, there are two main types: fiducial or non-fiducial\parencite{Agrafioti:2012secure}. 
+
+\subsection{Photoplethysmography}
+Photoplethysmography (PPG) is a simple technique to detect blood volume changes at skin\parencite{Karimian:2017human}. PPG is widely used in fitness trackers and smart-watches to monitor user's fitness behavior and health statement. The sensors detect the light variations when blood pass through the skin\parencite{Blasco:2018feasibility}. PPG can be gathered from transmissive mode at the fingertip or reflection mode as on the forehead\parencite{wiki:ppg}. A common PPG is shown at Fig
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .8\textwidth]{ppg.PNG}
+\caption{PPG signals from BIDMC PPG and Respiration Dataset\autocite{PhysioNet}}
+\label{fig:ppg}
+\end{figure}
+
 \subsection{Current Attacks}
+As mentioned before, biometric identification system does solve some problems in traditional identification system, such as lost/forgotten because they are based on physical objects or user's knowledge. However, nothing is perfect, biometrics leads into some brand-new risks. Fingerprint and face recognition are most common identification method, both can be easily observed and replicated by attacker\parencite{Eberz:2018your}. For example, fingerprints can be collected from smooth surface like a glass cup. Moreover, face identification system might make a wrong decision because of a 2-D photo which is grabbed from victim's social media as Facebook.
+
+Medical biometrics have become a popular research subject. In 2010, Odinaka et al. thought ECG are difficult to forge\parencite{Odinaka:2010ecg}.
+\subsubsection{Attacks on tradition biometrics}
+
+\subsubsection{Attacks on medical biometrics}
+
+\subsection{Motivation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .8\textwidth]{ecg_ppg.PNG}
+\caption{Synchronize ECG and PPG signals from BIDMC PPG and Respiration Dataset\autocite{PhysioNet}}
+\label{fig:ppg_ecg}
+\end{figure}
 
 \section{Machine Learning}
 \subsection{Machine Learning in Authentication}
