@@ -118,17 +118,23 @@ Medical biometrics have become a popular research subject. In 2010, Odinaka et a
 
 However, even existing ECG biometrics are considered offering a high-security level against impersonation attacks\parencite{Blasco:2018feasibility}, it is not perfect, some attack has already be introduced. For instance, Eberz et al. present a presentation attack against ECG biometrics in Nymi band by reply previous ECG signals\parencite{Eberz:2017broken}. In the reminder of this section, we will discuss about current attacks for both traditional biometrics and medical biometric.
 
-\subsubsection{Attacks on tradition biometrics}
+\subsubsection{Attacks on traditional biometrics}
+For traditional biometrics, the most common signals used to identify human is face, fingerprint and iris as static features, voice is widely used to distinguish human as dynamic signal when people make a phone call. However, because of the popularity of those method is so high that some high performance with low cost attacks have already existed.
+
+In 2015, Ergünay S K et al. \autocite{Ergunay:2015voicevulnerability} introduced a voice spoofing data-set which include threat contain reply, speech synthesis and voice conversion. Also, a experimental were provided to show the effect to automatic speaker verification system. The spoofing false acceptance rate is 96.5\% for Male and 81.5\% on Female.
+
+In 2017, Chen et al. \autocite{Chen:2017spoofing}researched a method to spoofing faces by using makeup. They found automated face recognition machine are suffered from make up attack and they thought it is easy for malicious individual trick identification system by using make up. 
 
 \subsubsection{Attacks on medical biometrics}
 
+
 \subsection{Motivation}
-A method is introduced by Verkruysse et al. which can collect PPG remotely (> 1m) with ambient light by inexpensive digital cameras (< \$200)\parencite{Verkruysse2008remotePPG}.
+Although those attacks on ECG are novel, but the effect are limited because of they assume the ECG signal of a victim has already captured\parencite{Blasco:2018feasibility}. Moreover, PPG a method is widely used and much easier collect than ECG, especially when a remote PPG collection method is introduced by Verkruysse et al. which can collect PPG remotely (> 1m) with ambient light by inexpensive digital cameras (< \$200)\parencite{Verkruysse2008remotePPG}. In addition, the synchronized ECG and PPG signals are shown in Fig \ref{fig:ppg_ecg}. Also, because of both ECG and PPG are represent the motivation of heart, we thought between the two signals there might be some correlations. Thus, we decided to find a transfer formula by using neural network.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width = .8\textwidth]{ecg_ppg.PNG}
-\caption{Synchronize ECG and PPG signals from BIDMC PPG and Respiration Dataset\autocite{PhysioNet}}
+\caption{Synchronized ECG and PPG signals from BIDMC PPG and Respiration Dataset\autocite{PhysioNet}}
 
 \label{fig:ppg_ecg}
 \end{figure}
