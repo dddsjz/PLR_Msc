@@ -16,6 +16,7 @@
 \usepackage{float}
 \usepackage{setspace}
 \usepackage{diagbox}
+\usepackage{subfigure}
 
 \renewcommand\thesection{\arabic {section}}
 
@@ -40,7 +41,7 @@ Biometric recognition is more secure and gives a more reliable solution for pers
 
 In this paper, we purpose to finding a transfer equation from PPG to ECG, it is a risk from ECG identification system. ECG signals are more considering as sensitive information, which can show not only personal health information but also psychological status\parencite{Damousis:2008unobtrusive}. Because of that, gathering ECG from an individual is difficult and expensive. However, PPG can be easily collected because of the fitness trackers and smart-watches have become very popular\parencite{Blasco:2018feasibility}. Thus, the attack which forges the victim's ECG to cheat identification system by transfer from victim's PPG will be much easier and cheaper than collect victim's ECG signal directly. And the risk should be considered seriously. 
 
-The following sections will be organized as: Section 2 will discuss the biometric system, include some current attacks, PPG and ECG authentication system and some relevant attacks. Section 3 will cover information on machine learning which includes those methods used in the authentication system. The neural network will be extracted from that method. Section 4 will be some related work.
+The following sections will be organized as: Section 2 will discuss the biometric system, include some current attacks, PPG and ECG authentication system and some relevant attacks. Section 3 will cover information on machine learning which includes those methods used in the authentication system. The neural network will be extracted to an individual part. Section 4 will be some related work.
 
 \section{Biometrics}\label{Biometrics}
 Biometrics, or biometric recognition, is becoming more and more popular in government and civilian identity management applications because it is the only way the identity management system can figure out whether the individual is already known or not\parencite{Jain:2011bio}. Biometrics is a pattern recognition problem, the user who wants to be authenticated should register a set of physiological and/or behavioral characteristics before and provides a current characteristic to match the previous one\parencite{Blasco:2018feasibility}. For example, physiological characteristics contain a face, iris, and the fingerprints, on the other side, keystroke dynamics, gait, and voice\parencite{Agrafioti:2011heart}. 
@@ -139,16 +140,66 @@ Although those attacks on ECG are novel, the effect is limited because they assu
 \centering
 \includegraphics[width = .8\textwidth]{ecg_ppg.PNG}
 \caption{Synchronized ECG and PPG signals from BIDMC PPG and Respiration Dataset\autocite{PhysioNet}}
-
 \label{fig:ppg_ecg}
 \end{figure}
 
 \section{Machine Learning}
-\subsection{Machine Learning in Authentication}
+Machine learning is a powerful tool when identifying individuals. For the ECG identification system, there are seven groups classifier to identify individuals:
+\begin{enumerate}
+    \item kNN classifier
+    \item Nearest Center classifier
+    \item LDA classifier
+    \item Neural network classifier
+    \item Generative classifier
+    \item Match score classifier
+    \item SVM classifier
+\end{enumerate}
+The SVM classifier is popular and based on machine learning, we will discuss more in this section. Also, the neural network is another widely used machine learning method in a biometric identification system. Because we will use a neural network to estimation ECG, the neural network will be also introduced.
+
+\subsection{SVM}
+Support vector machines(SVM) is considered as a discriminant classifier which defined by a separation hyperplane\parencite{patel_2019}. It is a supervised learning model which means the training sample should be labeled manually at first to let the machine learn the rule for distinguishing or analyzing data. SVM is used to classify text and hypertext, images, Hand-written, and biological\parencite{wiki:svm}. To classify data, the machine should determine the coming data belong to which class. In SVM, the data point is viewed as p-dimension vector,  if there is a (p-1) dimension hyperplane which can separate vectors, it is called linear classifier. A maximum-margin classifier is shown in Fig \ref{fig:svm_liner}, the blue and green point is a data point, the hyperplane is the red line in the middle. Because of the distance from hyperplane to the nearest data on each class is maximized, it is a maximum margin classifier and the stability of the classifier is optimal.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .8\textwidth]{SVM_margin.png}
+\caption{Maximum-margin hyperplane\autocite{wiki:svm}}
+\label{fig:svm_liner}
+\end{figure}
+
+However, the sets to discriminate are not often able to be separated by a linear method in that space\parencite{wiki:svm}. An example dataset is shown at Fig \ref{Fig.sub.1}. It is obviously, the linear classifier cannot separate by a hyperplane in a one dimension line (consider the situation is in two dimensions). In this situation, there is a transfer called kernel which transfers the dataset to higher dimension, separate dataset by a hyperplane and transfers the hyperplane back to origin dimension. As the graph Fig \ref{Fig.sub.2}, Fig \ref{Fig.sub.3} shows, a kernel function \[w = x^2 + y ^2\] is used to transfer so that the hyperplane in Y-Z axes is found and the hyperplane is shown as the circle in X-Y axes which is the origin dimension.
+
+\begin{figure}[H]
+\centering 
+\subfigure[Non-linear dataset, X-Y axises]{
+\label{Fig.sub.1}
+\includegraphics[width=0.3\textwidth, height=0.33\textwidth]{Kernel_Machine1.png}}
+\subfigure[Dataset in high dimension, Y-Z axises]{
+\label{Fig.sub.2}
+\includegraphics[width=0.3\textwidth, height=0.33\textwidth]{Kernel_Machine2.png}}
+\subfigure[Hyperplane at origin dimension, X-Y axises]{
+\label{Fig.sub.3}
+\includegraphics[width=0.3\textwidth, height=0.33\textwidth]{Kernel_Machine3.png}}
+\caption{Example for kernel mode SVM\autocite{patel_2019}}
+\label{Fig.main}
+\end{figure}
+
+SVM belong to a family of generalized linear classifiers,the main drawbacks contain following aspects\parencite{wiki:svm}:
+\begin{enumerate}
+    \item Needs of the complete label of data to train the model
+    \item Uncalibrated class membership probabilities
+    \item Only suitable for distinguish two class data, any multi-class task should be reduced to two class task. 
+    \item The parameters of solved model are difficult to translate.
+\end{enumerate}
+
 \subsection{Neural Network}
+Obviously, SVM is not a good choice for estimate ECG, so we consider to use neural network.
 
 \section{Related Work}
+Wavelet based ECG and PPG identification system\autocite{Fatemian:2009wavelet}.
 
+Current state for ECG and PPG identification system\parencite{Abo:2014biometric}.
+
+A method to estimation ECG features include PR interval, QRS interval, QT interval by PPG\parencite{Banerjee:2013estimation}.
 \section{Conclusion}
 
 \printbibliography
