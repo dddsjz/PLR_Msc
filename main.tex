@@ -192,14 +192,59 @@ SVM belong to a family of generalized linear classifiers,the main drawbacks cont
 \end{enumerate}
 
 \subsection{Neural Network}
-Obviously, SVM is not a good choice for estimate ECG, so we consider to use neural network.
+Obviously, SVM is not a good choice for estimate ECG, so we consider to use a neural network. The basis of a neural network, or neural network, is using networks of functions to understands and translate input data to the expected output data. The concept of a neural network was inspired by the neurons in the human brain. A neural network is a tool used in a machine learning algorithm but not the algorithm and it is a piece in a machine learning algorithm to process complex input data\parencite{Build}. 
+
+Many problems are using the neural network today, include spam email filtering, recognition for speech and image. For instance, in image recognition, the neural network learns to identify images that contain cats without any prior knowledge about cats but analyzing images that have been labeled manually as 'cat' or 'no cat'\parencite{wiki:neuralnetwork}. The neural network has become more and more popular in the prediction area as well. For example, a deep neural network has an advantage in prediction the activity of potential drug molecules compares with other machine learning method\parencite{Ma:2015deep}. Also, the neural network was used to predict the effects of defects in RNA splicing\parencite{Xiong:2015human}.
+
+A standard neural network composed of many connected processors. The processors, which are called neurons,  producing real-valued activation, except for input neurons, other neurons get activated through weighted connection from previously active neurons, the input neurons get activated by data input\parencite{Schmidhuber:2015deep}. Feedforward neural network is widely used in many applications, which map fixed-size input to a fixed-size output by layer to layer\parencite{Lecun:2015deep}. To map the input and output, a neurons layer compute a weighted sum of the input from the previous layer and pass the result by a non-layer function, the layers exclude input and output layer are considered as a hidden layer. The function normally is the rectified linear unit(ReLU) which is suitable for a neural network with many layers. 
+
+Simple stochastic gradient descent was used to train the multilayer architectures network. If the input functions and weights are relatively smooth, the gradients can be computed by the backpropagation procedure\parencite{Lecun:2015deep}. The backpropagation algorithm is a key trigger for renewed interest in neural networks\parencite{wiki:neuralnetwork}. In the backpropagation algorithm, weights at each node will be modified to distribute the error back to layers. However, in the late 1990s, the simple gradient descent was commonly considered as a method which could be stuck in poor local minima weight\parencite{Lecun:2015deep}. But in practice, the situation of poor local minima are rarely in large network\parencite{Lecun:2015deep}.
 
 \section{Related Work}
-Wavelet based ECG and PPG identification system\autocite{Fatemian:2009wavelet}.
+Banerjee R et al. introduced a method to estimation ECG features include PR interval, QRS interval, QT interval by PPG\parencite{Banerjee:2013estimation}. The author wants to find a feasible and cheap method to provide a basic screening system which can make an alert for possible unwellness toward to those people who are suffering from heart diseases or prone to heart attack. Therefore, they were trying to use PPG, which is a cheap, non-invasive and widely used signal, to estimation the range of some parameters of great value in ECG signal which are PR, RR, QRS, and QT interval. 
 
-Current state for ECG and PPG identification system\parencite{Abo:2014biometric}.
+\begin{figure}[H]
+\centering
+\includegraphics[width = .8\textwidth]{ppg1.PNG}
+\caption{PPG feature extraction\autocite{Banerjee:2013estimation}}
+\label{fig:ppg1}
+\end{figure}
 
-A method to estimation ECG features include PR interval, QRS interval, QT interval by PPG\parencite{Banerjee:2013estimation}.
+The Fig \ref{fig:ppg1} shows labeled PPG signal. The author first extracts ten dimension features from PPG which will be described below by the labels in the picture:
+
+\[\textrm{1. Peak to Peak Interval: }T_{pp} = T_{{s_n}+1} - T_{s_n}\]
+\[\textrm{2. Pulse Interval: }T_{pi} = T_{{v_n}+1} - T_{v_n}\]
+\[\textrm{3. Pulse Height: }V_{ph} = V_{s_n} - V_{v_n}\]
+\[\textrm{4. Crest Time: }T_{cr} = T_{s_n} - T_{v_n}\]
+\[\textrm{5. Delta Time: }T_{del} = T_{d_n} - T_{s_n}\]
+\[\textrm{6. Dict. Time: }T_{dic} = T_{d_n} - T_{v_n}\]
+\[\textrm{7. Falling Time: }T_{f} = T_{{v_n}+1} - T_{s_n}\]
+\[\textrm{8. Dic2Min Time: }T_{dm} = T_{{v_n}+1} - T_{d_n}\]
+\[\textrm{9. Rising Slope: }S_{r} = \frac{V_{s_n} - V_{v_n}}{T_{s_n} - T_{v_n}}\]
+\[\textrm{10. Falling Slope: }S_{f} = \frac{V_{{v_n} + 1} - V_{s_n}}{T_{{v_n} + 1} - T_{s_n}}\]
+
+Machine learning methods will be affected by dimensional disasters because as the dimension increases, the data will quickly become sparse, which means that if some input data is less relevant to the target, as the data dimension increases, the machine's Learning performance will be reduced. Therefore, the author selects features by using the maximum information coefficient (MIC) and Pearson product moment correlation coefficients to find the relationship between ECG and PPG features. The author found the relation between ECG parameter and PPG features as follows:
+\[F_{PR} = \{f^1, f^2, f^3, f^4, f^6, f^9, f^{10}\}\]
+\[F_{RR} = \{f^1, f^2, f^6, f^7\}\]
+\[F_{QRS} = \{f^4, f^5, f^6, f^{10}\}\]
+\[F_{QT} = \{f^1, f^2, f^5, f^6, f^7, f^{10}\}\]
+
+The author train different ECG classifier by the selected PPG features and the accuracy they got is in table \ref{tab:perfoemance_ppges}:
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c}
+         ECG param& with ANN(\%) & with SVm(\%) \\
+    \hline
+         PR & 88.5 & 90.3 \\
+         RR & 93.9 & 94.6 \\
+         QRS & 84.1 & 84.9 \\
+         QT & 91.1 & 92.6 
+    \end{tabular}
+    \caption{Performance of using selected features\autocite{Banerjee:2013estimation}}
+    \label{tab:perfoemance_ppges}
+\end{table}
+
 \section{Conclusion}
 
 \printbibliography
